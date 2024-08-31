@@ -1,0 +1,20 @@
+.not-found-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.not-found-title {
+  font-size: 2em;
+  color: #333;
+}
+
+.not-found-message {
+  margin: 20px 0;
+  font-size: 1.2em;
+  color: #666;
+}
+
+.not-found-link {
+  text-decoration: none;
+  color: blue;
+}
