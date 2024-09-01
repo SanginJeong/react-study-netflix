@@ -2,6 +2,7 @@ import React from 'react'
 import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
 import '../LoadingSpinner/LoadingSpinner.style.css';
 import './Banner.style.css';
+import '../Error/Error.style.css';
 
 const Banner = () => {
   const {data, isLoading, isError, error} = usePopularMoviesQuery()
@@ -11,7 +12,7 @@ const Banner = () => {
   }
 
   if (isError) {
-    return <h3>{error.message}</h3>
+    return <div className="error-message"><p>{error.message}</p></div>
   }
   return (
     <div 
