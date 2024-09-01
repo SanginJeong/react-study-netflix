@@ -8,7 +8,7 @@ import MovieDetailPage from './pages/MovieDetail/MovieDetailPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
-  // 홈페이지  /
+  // 홈페이지
   // 영화 전체 페이지 (검색) /movies
   // 영화 디테일 페이지 /movies/:id
   return (
