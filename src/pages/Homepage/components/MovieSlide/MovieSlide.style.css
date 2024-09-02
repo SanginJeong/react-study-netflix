@@ -1,0 +1,18 @@
+.carousel-container{
+  overflow: hidden;
+  height: 440px;
+}
+
+.slide-wrap{
+  padding: 0 50px;
+}
+
+.slide-wrap > h2 {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width : 48rem) {
+  .slide-wrap > h2{
+    text-align: center;
+  }
+}
