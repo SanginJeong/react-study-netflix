@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTopRatedMoviesQuery } from '../../../../../hooks/useTopRatedMovies';
-import '../../LoadingSpinner/LoadingSpinner.style.css';
-import '../../Error/Error.style.css';
+import '../../../../../common/LoadingSpinner/LoadingSpinner.style.css'
+import '../../../../../common/Error/Error.style.css';
 import MovieSlide from '../../../../../common/MovieSlide/MovieSlide';
 import { responsive } from '../../../../../constant/responsive/responsive';
 

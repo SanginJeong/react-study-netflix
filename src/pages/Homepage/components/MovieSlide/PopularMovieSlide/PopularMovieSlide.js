@@ -1,7 +1,7 @@
 import React from 'react'
 import { usePopularMoviesQuery } from '../../../../../hooks/usePopularMovies';
-import '../../LoadingSpinner/LoadingSpinner.style.css';
-import '../../Error/Error.style.css';
+import '../../../../../common/LoadingSpinner/LoadingSpinner.style.css'
+import '../../../../../common/Error/Error.style.css';
 import { responsive } from '../../../../../constant/responsive/responsive';
 import MovieSlide from '../../../../../common/MovieSlide/MovieSlide';
 
