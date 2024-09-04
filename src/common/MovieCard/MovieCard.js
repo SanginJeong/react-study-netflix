@@ -1,7 +1,22 @@
 import React from 'react'
 import './MovieCard.style.css';
+import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 
 const MovieCard = ({movie}) => {
+
+  const {data: genreData} = useMovieGenreQuery();
+  
+  const showGenre = (genreIdList) => {
+    if(!genreData) return []
+
+    const genreNameList = genreIdList.map((id)=>{
+      const genreObj = genreData.find((genre)=>genre.id === id)
+      return genreObj.name
+    })
+
+    return genreNameList
+  }
+
   return (
     <div 
       className='movie-card'
@@ -12,7 +27,7 @@ const MovieCard = ({movie}) => {
       <div className='overlay'>
         <h2 className='movie-title'>{movie.title}</h2>
         <div className='movie-genre-area'>
-          {movie.genre_ids.map((id)=>(<div className='movie-genre'>{id}</div>))}
+          {showGenre(movie.genre_ids).map((id)=>(<div className='movie-genre'>{id}</div>))}
           {movie.adult 
             ? <div className='movie-adult'>19+</div>
             : <div className='movie-all'>ALL</div>

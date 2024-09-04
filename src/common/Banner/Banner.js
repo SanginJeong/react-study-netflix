@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
+import { usePopularMoviesQuery } from '../../hooks/usePopularMovies'
 import '../LoadingSpinner/LoadingSpinner.style.css';
 import './Banner.style.css';
 import '../Error/Error.style.css';

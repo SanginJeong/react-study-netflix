@@ -1,5 +1,5 @@
 import React from 'react'
-import Banner from './components/Banner/Banner'
+import Banner from '../../common/Banner/Banner'
 import PopularMovieSlide from './components/MovieSlide/PopularMovieSlide/PopularMovieSlide'
 import TopRatedMovieSlide from './components/MovieSlide/TopRatedMovieSlide/TopRatedMovieSlide'
 import UpComingMovieSlide from './components/MovieSlide/UpComingMovieSlide/UpComingMovieSlide'
