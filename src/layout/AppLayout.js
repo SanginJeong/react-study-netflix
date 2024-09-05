@@ -1,9 +1,19 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import './AppLayout.style.css';
 import { useState } from 'react';
 const AppLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [keyword, setKeyword] = useState('');
+  const navigate = useNavigate();
+
+  const searchByKeyword = (e) => {
+    e.preventDefault();
+
+    // url 바꿔주기
+    navigate(`/movies?q=${keyword}`);
+    setKeyword("");
+  }
   return (
     <>
       <nav>
@@ -17,8 +27,10 @@ const AppLayout = () => {
             <Link to='/movies'><h4>Movies</h4></Link>
           </div>
 
-          <form action="">
-            <input type="text" placeholder='Search'/>
+          <form onSubmit={searchByKeyword}>
+            <input 
+              value={keyword}
+              onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='Search'/>
             <button type='submit'>Search</button>
           </form>
         </div>
