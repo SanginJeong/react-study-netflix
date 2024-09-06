@@ -15,6 +15,8 @@
   color: white;
   font-weight: bold;
   overflow-wrap: break-word;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .overlay:hover{
@@ -69,5 +71,8 @@
   }
   .movie-card{
     width: 200px;
+  }
+  .movie-card-area .movie-card{
+    width: 300px;
   }
 }

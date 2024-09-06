@@ -1,0 +1,44 @@
+.movie-poster img {
+  width: 500px;
+  height: 100%;
+}
+
+.movie-detail-info{
+  display: flex;
+  column-gap: 25px;
+}
+
+.movie-detail-page{
+  text-align: center;
+}
+
+.movie-detail-page-container{
+  width: 80%;
+  display: inline-block;
+  text-align: left;
+}
+
+.border-bottom{
+  border-bottom: 1px solid white;
+  padding-bottom: 20px;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.flex-info{
+  border: 1px solid;
+  background-color: red;
+  color: white;
+  padding: 6px 8px;
+}
+
+.movie-review{
+  border: 1px solid red;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
