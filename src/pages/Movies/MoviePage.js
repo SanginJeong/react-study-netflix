@@ -6,27 +6,56 @@ import '../../common/LoadingSpinner/LoadingSpinner.style.css';
 import MovieCard from '../../common/MovieCard/MovieCard';
 import './MoviePage.style.css';
 import ReactPaginate from 'react-paginate';
-import {Col, Container, Row} from 'react-bootstrap';
+import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 
-// 경로 2가지
-// nav바에서 클릭해서 온경우: popular movie
-// keyword를 입력해서 온경우: keyword와 관련된 영화를 보여줌
 const MoviePage = () => {
-  const  [query, setQuery] = useSearchParams();
-  const keyword = query.get("q");
   const [page,setPage]= useState(1);
-  const {data, isLoading, isError, error} = useSearchMovieQuery({keyword,page});
-  console.log(data);
+  const [selectedSort, setSelectedSort] = useState('high');
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [sortedList, setSortedList] = useState([]);
+  const [query, setQuery] = useSearchParams();
+  const keyword = query.get("q");
+
+  const {data, isLoading, isError, error} = useSearchMovieQuery({keyword,page,genre:selectedGenre});
+  const {data:genreData} = useMovieGenreQuery();
+
   
   const handlePageClick = ({selected}) => {
     setPage(selected+1);
-    
+  }
+
+  const handleGenre = (e) => {
+    setSelectedGenre(e.target.value);
+  }
+
+  const handleSort = (e) => {
+    setSelectedSort(e.target.value);
   }
   
   useEffect(()=>{
     setPage(1);
   },[keyword])
   
+  useEffect(() => {
+    const sortData = () => {
+      if (!data || !data.results) return [];
+
+      let dataList = [...data.results];
+
+      if (selectedSort === 'high') {
+        return dataList.sort((a, b) => b.popularity - a.popularity);
+      }
+      if (selectedSort === 'low') {
+        return dataList.sort((a, b) => a.popularity - b.popularity);
+      }
+
+      return dataList;
+    };
+
+    setSortedList(sortData());
+    console.log('sortedList',sortedList);
+  }, [data, selectedSort]);
+
   if (isLoading) {
     return <div className="spinner"></div>
   }
@@ -45,22 +74,26 @@ const MoviePage = () => {
           : 
           <div className="movie-page">
             <div className="custom-select">
-            <select>
-              <option value="0">필터</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-          </div>
-
-          <div className='movie-card-area'>
-            <div className="row">
-            { data.results.map((movie,index)=>(
-              <MovieCard movie = {movie}/>
+              <select value={selectedGenre} onChange={handleGenre}>
+                <option value="">카테고리</option>
+                {genreData?.map((genre)=>(
+                  <option value={genre.id}>{genre.name}</option>
                 ))}
+              </select>
+              <select value={selectedSort} onChange={handleSort}>
+                <option value="high">평점 높은 순</option>
+                <option value="low">평점 낮은 순</option>
+              </select>
+            </div>
+
+            <div className='movie-card-area'>
+              <div className="row">
+              {sortedList?.map((movie,index)=>(
+                <MovieCard movie = {movie}/>
+                  ))}
+              </div>
             </div>
           </div>
-        </div>
         }
         
         <ReactPaginate

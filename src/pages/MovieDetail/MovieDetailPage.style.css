@@ -23,13 +23,13 @@
   padding-bottom: 20px;
 }
 
-.flex{
+.movie-detail{
   display: flex;
   align-items: center;
   column-gap: 20px;
 }
 
-.flex-info{
+.movie-detail-userInfo{
   border: 1px solid;
   background-color: red;
   color: white;
@@ -41,4 +41,37 @@
   border-radius: 12px;
   padding: 10px;
   margin-bottom: 15px;
+}
+
+
+.movie-detail-button-area{
+  margin: 20px 0px;
+}
+
+.selected-button {
+  background-color: red;
+}
+
+.related-area{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  row-gap: 20px;
+  padding: 80px 0px;
+}
+
+@media screen and (max-width: 48rem) {
+  .related-area{
+    grid-template-columns: 1fr;
+  }
+  .movie-card{
+    width: 100%;
+    
+  }
+  .movie-detail-info{
+    display: flex;
+    flex-direction: column;
+  }
+  .movie-poster img{
+    width: 100%;
+  }
 }
