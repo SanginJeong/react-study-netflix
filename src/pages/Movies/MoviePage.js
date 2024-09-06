@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie'
 import { useSearchParams } from 'react-router-dom';
 import '../../common/Error/Error.style.css';
@@ -16,11 +16,17 @@ const MoviePage = () => {
   const keyword = query.get("q");
   const [page,setPage]= useState(1);
   const {data, isLoading, isError, error} = useSearchMovieQuery({keyword,page});
+  console.log(data);
   
   const handlePageClick = ({selected}) => {
     setPage(selected+1);
     
   }
+  
+  useEffect(()=>{
+    setPage(1);
+  },[keyword])
+  
   if (isLoading) {
     return <div className="spinner"></div>
   }
@@ -29,11 +35,16 @@ const MoviePage = () => {
     return <div className="error-message"><p>{error.message}</p></div>
   }
 
-
   return (
       <div className="wrap">
-        <div className="movie-page">
-          <div className="custom-select">
+        {data.results.length === 0 
+          ? 
+          <div className='no-results'>
+            <h1>No Results</h1>
+          </div>
+          : 
+          <div className="movie-page">
+            <div className="custom-select">
             <select>
               <option value="0">필터</option>
               <option value="1">Option 1</option>
@@ -41,21 +52,24 @@ const MoviePage = () => {
               <option value="3">Option 3</option>
             </select>
           </div>
+
           <div className='movie-card-area'>
             <div className="row">
-              {data?.results.map((movie,index)=>(
-                <MovieCard movie = {movie}/>
-              ))}
+            { data.results.map((movie,index)=>(
+              <MovieCard movie = {movie}/>
+                ))}
             </div>
           </div>
         </div>
+        }
+        
         <ReactPaginate
-          nextLabel="Next →"
+          nextLabel="→"
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={data?.total_pages}
-          previousLabel="← Previous"
+          previousLabel="←"
           pageClassName="custom-page-item"
           pageLinkClassName="custom-page-link"
           previousClassName="custom-prev-item"
