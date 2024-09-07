@@ -42,11 +42,17 @@ const MoviePage = () => {
 
       let dataList = [...data.results];
 
-      if (selectedSort === 'high') {
+      if (selectedSort === 'high-p') {
         return dataList.sort((a, b) => b.popularity - a.popularity);
       }
-      if (selectedSort === 'low') {
+      if (selectedSort === 'low-p') {
         return dataList.sort((a, b) => a.popularity - b.popularity);
+      }
+      if (selectedSort === 'high-s') {
+        return dataList.sort((a, b) => b.vote_average - a.vote_average)
+      }
+      if (selectedSort === 'low-s') {
+        return dataList.sort((a, b) => a.vote_average - b.vote_average)
       }
 
       return dataList;
@@ -81,8 +87,10 @@ const MoviePage = () => {
                 ))}
               </select>
               <select value={selectedSort} onChange={handleSort}>
-                <option value="high">평점 높은 순</option>
-                <option value="low">평점 낮은 순</option>
+                <option value="high-p">High Popularity</option>
+                <option value="low-p">Low Popularity</option>
+                <option value="high-s">High Score</option>
+                <option value="low-s">Low Score</option>
               </select>
             </div>
 
